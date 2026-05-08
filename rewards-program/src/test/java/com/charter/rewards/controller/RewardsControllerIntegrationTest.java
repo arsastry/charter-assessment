@@ -20,10 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * Integration tests for {@link RewardsController}.
- * <p>
- * Uses a full Spring Boot context with an in-memory H2 database
- * to test the REST endpoints end-to-end.
- * </p>
  */
 @SpringBootTest
 @AutoConfigureMockMvc

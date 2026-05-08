@@ -2,6 +2,7 @@ package com.charter.rewards.controller;
 
 import com.charter.rewards.dto.CustomerRewardsResponse;
 import com.charter.rewards.service.RewardsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,25 +20,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/rewards")
+@RequiredArgsConstructor
 public class RewardsController {
 
     private final RewardsService rewardsService;
 
     /**
-     * Constructs the RewardsController with the given rewards service.
-     *
-     * @param rewardsService the service for calculating rewards
-     */
-    public RewardsController(RewardsService rewardsService) {
-        this.rewardsService = rewardsService;
-    }
-
-    /**
      * Retrieves reward points for a specific customer.
-     * <p>
-     * Returns a breakdown of points per month and total points
-     * for the last three months of transactions.
-     * </p>
      *
      * @param customerId the unique identifier of the customer
      * @return the customer's reward points summary
@@ -50,10 +39,6 @@ public class RewardsController {
 
     /**
      * Retrieves reward points for all customers.
-     * <p>
-     * Returns a list of reward summaries, one per customer, each containing
-     * monthly and total points for the last three months.
-     * </p>
      *
      * @return list of reward points summaries for all customers
      */

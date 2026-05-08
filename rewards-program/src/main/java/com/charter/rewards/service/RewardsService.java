@@ -4,6 +4,7 @@ import com.charter.rewards.dto.CustomerRewardsResponse;
 import com.charter.rewards.exception.CustomerNotFoundException;
 import com.charter.rewards.model.Transaction;
 import com.charter.rewards.repository.TransactionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,16 +17,9 @@ import java.util.stream.Collectors;
 
 /**
  * Service responsible for calculating reward points from customer transactions.
- * <p>
- * Reward rules:
- * <ul>
- *   <li>2 points for every dollar spent over $100 per transaction</li>
- *   <li>1 point for every dollar spent between $50 and $100 per transaction</li>
- * </ul>
- * For example, a $120 purchase earns 2×$20 + 1×$50 = 90 points.
- * </p>
  */
 @Service
+@RequiredArgsConstructor
 public class RewardsService {
 
     private static final int HIGH_THRESHOLD = 100;
@@ -36,15 +30,6 @@ public class RewardsService {
     private static final DateTimeFormatter MONTH_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM");
 
     private final TransactionRepository transactionRepository;
-
-    /**
-     * Constructs the RewardsService with the given transaction repository.
-     *
-     * @param transactionRepository the repository for transaction data access
-     */
-    public RewardsService(TransactionRepository transactionRepository) {
-        this.transactionRepository = transactionRepository;
-    }
 
     /**
      * Calculates reward points for a specific customer over the last three months.
@@ -89,14 +74,6 @@ public class RewardsService {
 
     /**
      * Calculates reward points for a single transaction amount.
-     * <p>
-     * Points are calculated as follows:
-     * <ul>
-     *   <li>0 points for amounts $50 or below</li>
-     *   <li>1 point per dollar for the portion between $50 and $100</li>
-     *   <li>2 points per dollar for the portion above $100</li>
-     * </ul>
-     * </p>
      *
      * @param amount the transaction amount in dollars
      * @return the calculated reward points (never negative)
@@ -123,7 +100,7 @@ public class RewardsService {
         String customerName = transactions.isEmpty() ? "Unknown" : transactions.get(0).getCustomerName();
 
         Map<String, Integer> monthlyPoints = new LinkedHashMap<>();
-        int totalPoints = 0;
+        int totalPoints ;
 
         Map<YearMonth, List<Transaction>> byMonth = transactions.stream()
                 .collect(Collectors.groupingBy(t -> YearMonth.from(t.getTransactionDate())));

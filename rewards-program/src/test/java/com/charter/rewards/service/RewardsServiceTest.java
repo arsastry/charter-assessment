@@ -4,7 +4,6 @@ import com.charter.rewards.dto.CustomerRewardsResponse;
 import com.charter.rewards.exception.CustomerNotFoundException;
 import com.charter.rewards.model.Transaction;
 import com.charter.rewards.repository.TransactionRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,55 +36,55 @@ class RewardsServiceTest {
 
     @Test
     @DisplayName("$120 purchase should earn 90 points (2×20 + 1×50)")
-    void calculatePoints_120_shouldReturn90() {
+    void calculatePoints1() {
         assertEquals(90, rewardsService.calculatePoints(120.0));
     }
 
     @Test
     @DisplayName("$200 purchase should earn 250 points (2×100 + 1×50)")
-    void calculatePoints_200_shouldReturn250() {
+    void calculatePoints2() {
         assertEquals(250, rewardsService.calculatePoints(200.0));
     }
 
     @Test
     @DisplayName("$100 purchase should earn 50 points (1×50)")
-    void calculatePoints_100_shouldReturn50() {
+    void calculatePoints3() {
         assertEquals(50, rewardsService.calculatePoints(100.0));
     }
 
     @Test
     @DisplayName("$75 purchase should earn 25 points (1×25)")
-    void calculatePoints_75_shouldReturn25() {
+    void calculatePoints4() {
         assertEquals(25, rewardsService.calculatePoints(75.0));
     }
 
     @Test
     @DisplayName("$50 purchase should earn 0 points")
-    void calculatePoints_50_shouldReturn0() {
+    void calculatePoints5() {
         assertEquals(0, rewardsService.calculatePoints(50.0));
     }
 
     @Test
     @DisplayName("$49.99 purchase should earn 0 points")
-    void calculatePoints_49_99_shouldReturn0() {
+    void calculatePoints6() {
         assertEquals(0, rewardsService.calculatePoints(49.99));
     }
 
     @Test
     @DisplayName("$0 purchase should earn 0 points")
-    void calculatePoints_zero_shouldReturn0() {
+    void calculatePoints7() {
         assertEquals(0, rewardsService.calculatePoints(0.0));
     }
 
     @Test
     @DisplayName("$51 purchase should earn 1 point")
-    void calculatePoints_51_shouldReturn1() {
+    void calculatePoints8() {
         assertEquals(1, rewardsService.calculatePoints(51.0));
     }
 
     @Test
     @DisplayName("$101 purchase should earn 52 points (2×1 + 1×50)")
-    void calculatePoints_101_shouldReturn52() {
+    void calculatePoints9() {
         assertEquals(52, rewardsService.calculatePoints(101.0));
     }
 
@@ -174,19 +173,19 @@ class RewardsServiceTest {
 
     @Test
     @DisplayName("Transactions at exactly $50 boundary should earn 0 points")
-    void calculatePoints_boundaryAt50() {
+    void calculatePoints10() {
         assertEquals(0, rewardsService.calculatePoints(50.0));
     }
 
     @Test
     @DisplayName("Transactions at exactly $100 boundary should earn 50 points")
-    void calculatePoints_boundaryAt100() {
+    void calculatePoints11() {
         assertEquals(50, rewardsService.calculatePoints(100.0));
     }
 
     @Test
     @DisplayName("Very large transaction should calculate correctly")
-    void calculatePoints_veryLargeAmount() {
+    void calculatePoints12() {
         // $1000: (1000-100)*2 + 50*1 = 1800 + 50 = 1850
         assertEquals(1850, rewardsService.calculatePoints(1000.0));
     }

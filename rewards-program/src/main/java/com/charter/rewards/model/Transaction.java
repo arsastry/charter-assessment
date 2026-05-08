@@ -6,17 +6,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.*;
+
 import java.time.LocalDate;
 
 /**
  * Entity representing a customer purchase transaction.
- * <p>
- * Each transaction records the customer who made the purchase,
- * the amount spent, and the date of the transaction.
- * </p>
  */
 @Entity
 @Table(name = "transactions")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Transaction {
 
     /** Unique identifier for the transaction. */
@@ -40,62 +41,11 @@ public class Transaction {
     @Column(name = "transaction_date", nullable = false)
     private LocalDate transactionDate;
 
-    /** Default constructor required by JPA. */
-    public Transaction() {
-    }
-
-    /**
-     * Constructs a new Transaction with the specified details.
-     *
-     * @param customerId      the customer identifier
-     * @param customerName    the customer name
-     * @param amount          the transaction amount in dollars
-     * @param transactionDate the date of the transaction
-     */
+    /** Custom constructor for usage in DataLoader */
     public Transaction(Long customerId, String customerName, Double amount, LocalDate transactionDate) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.amount = amount;
-        this.transactionDate = transactionDate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public LocalDate getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(LocalDate transactionDate) {
         this.transactionDate = transactionDate;
     }
 }
