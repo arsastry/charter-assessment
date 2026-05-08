@@ -1,0 +1,36 @@
+# --- Build Artifacts ---
+target/
+
+# --- Compiled Class Files ---
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+
+# --- IDE Specific Settings ---
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+gen/
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+.metadata/
+
+# VS Code
+.vscode/
+
+# --- Spring Boot Specifics ---
+.sts4-cache/
+.springBeans/
+
+# --- Logs & OS ---
+*.log
+logs/
+.DS_Store
+Thumbs.db
